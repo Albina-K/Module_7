@@ -291,11 +291,13 @@ namespace Module_7
             Electricity = 50;
             Gas = 50;
         }
-
+        
         public override void Move() 
         {
+
+            base.Move();//использование базового метода Move
             Console.WriteLine("Вызван метод Move класса HybridCar2");
-            Mileage++;
+           // Mileage++;
 
             switch (FuelType2) 
             {
@@ -334,7 +336,7 @@ namespace Module_7
     {
         public virtual void Display()
         {
-            Console.WriteLine("Метод класса Base");
+            Console.WriteLine("Метод класса BaseClass");
         }
     }
 
@@ -342,6 +344,7 @@ namespace Module_7
     { 
         public override void Display()
         {
+            base.Display();
             Console.WriteLine("Метод класса DerivedClass");
         }
     }
@@ -454,6 +457,93 @@ namespace Module_7
             //добавленная логика
         }
     }
-    
-    
+
+    class A
+    {
+        public virtual void Display()
+        {
+            Console.WriteLine("Вызван метод класса А");
+        }
+    }
+    class B : A 
+    {
+        public new void Display()
+        {
+            Console.WriteLine("Вызван метод класса В");
+        }
+    }
+
+    class C : A
+    {
+        
+        public override void Display()
+        {
+            Console.WriteLine("Вызван метод класса C");
+        }
+    }
+    class D : B
+    {
+        //сокрытие метода через ключевое слово new
+        public new void Display()
+        {
+           Console.WriteLine("Вызван метод класса D");
+        }
+    }
+
+    class E : C
+    {
+        //сокрытие метода через ключевое слово new
+        public new void Display()
+        {
+         Console.WriteLine("Вызван метод класса E");
+        }
+    }
+
+    class Program10
+    {
+        static void Main(string[] args)
+        {
+            A a = new A();
+            B b = new B();
+            C c = new C();
+
+            a.Display(); //метод класса A
+            b.Display(); //метод класса B
+            ((A)b).Display(); //метод класса B
+
+            c.Display(); //метод класса C
+            ((A)c).Display(); //метод класса B
+            ((B)c).Display(); //метод класса B
+
+        }
+    }
+    internal class Program11
+    {
+        static void Main(string[] args)
+        {
+            Vector a = new Vector { X = 3, Y = 5 };
+            Vector b = new Vector { X = 7, Y = 13 };
+
+            Vector c = a.Add(b);
+            Console.WriteLine($"{c.X}, {c.Y}");
+        }
+    }
+    class Vector
+    {
+        public int X;
+        public int Y;
+
+        public Vector Add(Vector second)
+        {
+            return new Vector
+            {
+                X = this.X + second.X,
+                Y = this.Y + second.Y
+            };
+        }
+    }
+
+        Vector a = new Vector { X = 3, Y = 5};
+        Vector b = new Vector { X = 7, Y = 13 };
+        Vector c = new Vector { X = a.X + b.X, Y = a.Y + b.Y };
 }
