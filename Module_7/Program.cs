@@ -1138,6 +1138,22 @@ namespace Module_7
 
     }
 
+    class Order <TDelivery, TStruct> where TDelivery: Delivery
+    {
+        public TDelivery Delivery;
+        public int Number;
+        public string Description;
+
+        public void DisplayAddress()
+        {
+            Console.WriteLine(Delivery.Address);
+        }
+
+        // ... Другие поля
+    }
+
+}
+
     class PremiumService<T> where T : Order<HomeDelivery>
     {
         public T Order;
@@ -1159,12 +1175,12 @@ namespace Module_7
 
     }
 
-    class CarPart
+    abstract   class CarPart
     {
 
     }
 
-    class Engine
+   abstract class Engine
     {
 
     }
@@ -1184,8 +1200,25 @@ namespace Module_7
 
     }
 
+    class ElectricCar :Car<ElectricEngine>
+    {
+        public override void ChangePart<TPart>(TPart newPart)
+        {
 
-    class Car<TEngine> where TEngine : Engine
+        }
+
+    }
+
+    class GasCar : Car<GasEngine>
+
+    {
+        public override void ChangePart<TPart>(TPart newPart)
+        { 
+        
+        }
+    }
+
+    abstract class Car<TEngine> where TEngine : Engine
     {
         public TEngine Engine;
 
