@@ -1117,179 +1117,251 @@ namespace Module_7
             Console.WriteLine(Delivery.Address);
         }
     }
+
+    /*конструктор имеет одинаковое название с классом
+    конструтор с параметрами
+    public Order (int a, int b)
+    {
+    Number = a;
+    Description = b;
+    }
+
+   инициализация через конструктор
+    в лассе Program
+    Order(возможно это не нужно) order = new Order ( int a (название переменной вместо а, то что мы хотим увидеть в консоле) и тоже самое с int b)
+    order.DisplayAddress();
+
+    можно инициализировать поля в конструкторе
+    Order order = new Order {Number = 1234, Description = "NNN"};
+    order.DisplayAddress();
+    */
+
+
+    //нужно где-то использовать инкапсуляцию, думаю - private
+
+
+
+    // protected Защищенный член класса.Используется при наследовании(одном из принципов ООП, о котором мы поговорим в следующем модуле).
+    // Элементы, помеченные таким модификатором, доступны из любого места в текущем классе или в производных классах.При этом производные классы могут располагаться в других сборках.
+
+
+    /*свойства 
+     * В данном случае публичным свойством является public int Age, которое работает с приватным полем
+     * private int age
+     * public int Age
+     * {
+     * get
+     * {
+     * return age;
+     * }
+     * set
+     * {
+     * age = value;
+     * }
+     * }
+     * */
+
     abstract class Delivery
-    {
-        public string Address;
+{
+    public string Address;
 
-    }
+}
 
-    class HomeDelivery : Delivery
-    {
+class HomeDelivery : Delivery
+{
 
-    }
+}
 
-    class PickPointDelivery : Delivery
-    {
+class PickPointDelivery : Delivery
+{
 
-    }
+}
 
-    class ShopDelivery : Delivery
-    {
+class ShopDelivery : Delivery
+{
 
-    }
+}
 
-    class Order <TDelivery, TStruct> where TDelivery: Delivery
-    {
-        public TDelivery Delivery;
-        public int Number;
-        public string Description;
+class Order <TDelivery, TStruct> where TDelivery: Delivery
+{
+    public TDelivery Delivery;
+    public int Number;
+    public string Description;
 
-        public void DisplayAddress()
+        /*privat  код получения заказа
+        public....
         {
-            Console.WriteLine(Delivery.Address);
+        get
+        {
+        }
+        set
+        {
+        }
         }
 
-        // ... Другие поля
+        class Program
+{
+	static void Main(string[] args)
+	{
+		User user = new User();
+
+		// Setter запись
+		user.Age = 23;
+
+		// Getter чтение
+		Console.WriteLine(user.Age);
+
+		Console.ReadKey();
+	}
+}
+        */
+
+        public void DisplayAddress()
+    {
+        Console.WriteLine(Delivery.Address);
+    }
+
+    // ... Другие поля
+}
+
+}
+
+class PremiumService<T> where T : Order<HomeDelivery>
+{
+    public T Order;
+}
+
+class Order<TDelivery> where TDelivery : Delivery
+{
+
+}
+
+
+class ElectricEngine : Engine
+{
+
+}
+
+class GasEngine : Engine
+{
+
+}
+
+abstract   class CarPart
+{
+
+}
+
+abstract class Engine
+{
+
+}
+
+class Battery : CarPart
+{
+
+}
+
+class Differential : CarPart
+{
+
+}
+
+class Wheel : CarPart
+{
+
+}
+
+class ElectricCar :Car<ElectricEngine>
+{
+    public override void ChangePart<TPart>(TPart newPart)
+    {
+
     }
 
 }
 
-    class PremiumService<T> where T : Order<HomeDelivery>
-    {
-        public T Order;
-    }
+class GasCar : Car<GasEngine>
 
-    class Order<TDelivery> where TDelivery : Delivery
-    {
-
-    }
-
-
-    class ElectricEngine : Engine
-    {
-
-    }
-
-    class GasEngine : Engine
-    {
-
-    }
-
-    abstract   class CarPart
-    {
-
-    }
-
-   abstract class Engine
-    {
-
-    }
-
-    class Battery : CarPart
-    {
-
-    }
-
-    class Differential : CarPart
-    {
-
-    }
-
-    class Wheel : CarPart
-    {
-
-    }
-
-    class ElectricCar :Car<ElectricEngine>
-    {
-        public override void ChangePart<TPart>(TPart newPart)
-        {
-
-        }
-
-    }
-
-    class GasCar : Car<GasEngine>
-
-    {
-        public override void ChangePart<TPart>(TPart newPart)
-        { 
-        
-        }
-    }
-
-    abstract class Car<TEngine> where TEngine : Engine
-    {
-        public TEngine Engine;
-
-        public virtual void ChangePart<TPart>(TPart NewPart) where TPart : CarPart
-
-        {
-
-        }
-
-    }
-
-
-
-    class Record<T1, T2>
-    {
-
-        public T1 Id;
-        public T2 Value;
-        public DateTime Date;
-    }
-
-    //Обобщённые методы
-    //нестатическими
-    class Obj
-    {
-        public void Display<T>(T param)
-        {
-            Console.WriteLine(param.ToString();
-        }
-    }
-
-    //статическими
-    class Program
-    {
-        public static void Swap<T>(ref T x, ref T y)
-        {
-            T t = x;
-            x = y;
-            y = t;
-        }
-
-        //Для демонстрации работы методов воспользуемся следующим кодом:
-        static void Main(string[] args)
-        {
-            Obj obj = new Obj();
-            obj.Display<int>(345);
-
-            int num1 = 4;
-            int num2 = 10;
-            Swap<int>(ref num1, ref num2);
-
-            Console.WriteLine("{0} {1}", num1, num2);
-            Console.ReadKey();
-
-        }
-
-    }
-
-    class BaseClass<T>
-    {
-        public T Field;
-
-    }
-    class DerivedClass<T> : BaseClass<T> 
+{
+    public override void ChangePart<TPart>(TPart newPart)
     { 
-    public T Property
-        {
-            get;
-            set;
-        }
+
     }
+}
+
+abstract class Car<TEngine> where TEngine : Engine
+{
+    public TEngine Engine;
+
+    public virtual void ChangePart<TPart>(TPart NewPart) where TPart : CarPart
+
+    {
+
+    }
+
+}
+
+
+
+class Record<T1, T2>
+{
+
+    public T1 Id;
+    public T2 Value;
+    public DateTime Date;
+}
+
+//Обобщённые методы
+//нестатическими
+class Obj
+{
+    public void Display<T>(T param)
+    {
+        Console.WriteLine(param.ToString();
+    }
+}
+
+//статическими
+class Program
+{
+    public static void Swap<T>(ref T x, ref T y)
+    {
+        T t = x;
+        x = y;
+        y = t;
+    }
+
+    //Для демонстрации работы методов воспользуемся следующим кодом:
+    static void Main(string[] args)
+    {
+        Obj obj = new Obj();
+        obj.Display<int>(345);
+
+        int num1 = 4;
+        int num2 = 10;
+        Swap<int>(ref num1, ref num2);
+
+        Console.WriteLine("{0} {1}", num1, num2);
+        Console.ReadKey();
+
+    }
+
+}
+
+class BaseClass<T>
+{
+    public T Field;
+
+}
+class DerivedClass<T> : BaseClass<T> 
+{ 
+public T Property
+    {
+        get;
+        set;
+    }
+}
 }
 
 
