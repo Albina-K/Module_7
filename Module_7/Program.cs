@@ -1196,7 +1196,7 @@ namespace Module_7
     /*должен быть метод переопределения
 
     в базовом классе
-    public virtual void Move
+    public virtual void Move()
     {}
 
     в классе наследнике
@@ -1205,6 +1205,102 @@ namespace Module_7
     */
 
 
+    /*можно переопределить свойство в классе наследнике
+     * 
+     * 
+     *  public virtual int Counter 
+  {
+    get;
+    set;
+  }
+
+    private int counter;
+  public override int Counter 
+  {
+    get 
+    {
+      return counter;
+    }
+    set 
+    {
+      if (value >= 0) 
+      {
+        counter = value;
+      }
+    }
+  }
+    */
+
+    /*переопределение через base в классе наследнике
+     
+     
+    
+     /*
+
+      public virtual void Method() 
+  {
+    //Базовая логика
+  }
+
+    public override void Method() 
+  {
+    base.Method();
+    //Добавленная логика
+  }
+    */
+
+
+
+
+    /*перегрузка методов
+     это методы с одинаковым названием но разными сигнатурами
+
+    long Sum(long a, long b) 
+{
+  return a + b;
+}
+
+double Sum(double a, double b) 
+{
+  return a + b;
+}
+
+int Sum(int a, int b, int c) 
+{
+  return a + b + c;
+}
+    */
+
+
+
+    /*
+     должна быть перегрузка операторов
+    class Obj 
+{
+  public int Value;
+
+  public static Obj operator + (Obj a, Obj b) 
+  {
+    return new Obj 
+    {
+      Value = a.Value + b.Value
+    };
+  }
+  public static Obj operator - (Obj a, Obj b) 
+  {
+    return new Obj 
+    {
+      Value = a.Value - b.Value
+    };
+  }
+}
+     */
+
+
+
+    /*сделать мапссив заказов через индексацию
+     * как для коллекции книг  7.2, пример до задания 7.2.13
+     */
 
     abstract class Delivery
 {
@@ -1262,7 +1358,7 @@ class Order <TDelivery, TStruct> where TDelivery: Delivery
 }
         */
 
-        public void DisplayAddress()
+    public void DisplayAddress()
     {
         Console.WriteLine(Delivery.Address);
     }
