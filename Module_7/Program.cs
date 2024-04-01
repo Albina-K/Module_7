@@ -82,6 +82,11 @@ namespace Module_7
 
     }
 
+
+
+
+    
+
     //с этим модификатор нельзя наследовать 
     sealed class Admin
     {
@@ -1061,6 +1066,13 @@ namespace Module_7
         Generic<object, int, string> generic = new Generic<object, int, string>();
     }
 
+
+
+
+
+
+
+
     class Order
     {
         public object Number;
@@ -1161,9 +1173,43 @@ namespace Module_7
      * }
      * */
 
+
+
+    //номер отслеживания
+
+
+    // условия возврата
+
+
+    // ввод последних цифр карты
+
+
+    //оплата при получении
+
+
+    //онлайн оплата
+
+
+
+
+
+    /*должен быть метод переопределения
+
+    в базовом классе
+    public virtual void Move
+    {}
+
+    в классе наследнике
+    public override void Move() 
+    {}
+    */
+
+
+
     abstract class Delivery
 {
     public string Address;
+
 
 }
 
