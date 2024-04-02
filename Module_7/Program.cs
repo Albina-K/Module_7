@@ -1068,7 +1068,10 @@ namespace Module_7
 
 
 
-
+    static class IntExtensions
+    {
+        public static
+    }
 
 
 
@@ -1189,6 +1192,101 @@ namespace Module_7
 
     //онлайн оплата
 
+    //класс доставка бесплатно от суммы заказа
+
+    //класс подарок от суммы заказа
+
+
+    //выдача заказа по номеру
+
+
+
+
+    //метод расширения
+
+    /*
+     static class StringExtensions 
+{
+  public static char GetLastChar(this string source) 
+  {
+    return source[source.Length - 1];
+  }
+}
+Теперь, чтобы использовать данный метод, нам нужно взять экземпляр строки и вызвать для него данный метод:
+
+string str = "Hello";
+Console.WriteLine(str.GetLastChar());
+
+Console.WriteLine("Строка".GetLastChar());
+    */
+
+
+
+
+
+    //использовать статические методы, свойства
+
+    /*
+     
+    class Helper 
+{
+  public static int Sum(int a, int b, int c) 
+  {
+    return a + b + c;
+  }
+}
+
+    Мы можем вызывать данный метод в коде, где доступен класс Helper:
+
+var sum = Helper.Sum(1, 2, 3);
+
+    */
+
+
+
+
+
+    /*
+     КОМПОЗИЦИЯ
+     
+     class MotherBoard 
+{ 
+}
+class SystemUnit 
+{
+  private MotherBoard motherBoard;
+
+  public SystemUnit() 
+  {
+    motherBoard = new MotherBoard();
+  }
+}*/
+
+
+
+
+
+
+
+
+    /*
+     
+    АГРЕГАЦИЯ
+    
+    class MotherBoard 
+{
+}
+class SystemUnit 
+{
+  private MotherBoard motherBoard;
+
+  public SystemUnit(MotherBoard motherBoard) 
+  {
+    this.motherBoard = motherBoard;
+  }
+}
+
+
 
 
 
@@ -1231,23 +1329,23 @@ namespace Module_7
   }
     */
 
-    /*переопределение через base в классе наследнике
-     
-     
-    
-     /*
+    //переопределение через base в классе наследнике
 
-      public virtual void Method() 
-  {
-    //Базовая логика
-  }
 
-    public override void Method() 
-  {
-    base.Method();
-    //Добавленная логика
-  }
-    */
+
+    /*
+
+     public virtual void Method() 
+ {
+   //Базовая логика
+ }
+
+   public override void Method() 
+ {
+   base.Method();
+   //Добавленная логика
+ }
+   */
 
 
 
@@ -1301,6 +1399,57 @@ int Sum(int a, int b, int c)
     /*сделать мапссив заказов через индексацию
      * как для коллекции книг  7.2, пример до задания 7.2.13
      */
+
+    /*
+    класс обобщения
+    
+    class Car<T>
+{
+	public T Engine;
+}
+    */
+
+
+    /*обощеные методы
+     *
+    class Obj
+{
+	public void Display<T>(T param)
+	{
+		Console.WriteLine(param.ToString());
+	}
+}
+
+    */
+
+
+    /*
+     class Program
+{
+	public static void Swap<T>(ref T x, ref T y)
+	{
+		T t = x;
+		x = y;
+		y = t;
+	}
+}
+    */
+
+
+    /*static void Main(string[] args)
+{
+	Obj obj = new Obj();
+	obj.Display<int>(345);
+
+	int num1 = 4;
+	int num2 = 10;
+	Swap<int>(ref num1, ref num2);
+
+	Console.WriteLine("{0} {1}", num1, num2);
+
+	Console.ReadKey();
+}*/
+
 
     abstract class Delivery
 {
@@ -1358,19 +1507,45 @@ class Order <TDelivery, TStruct> where TDelivery: Delivery
 }
         */
 
-    public void DisplayAddress()
-    {
-        Console.WriteLine(Delivery.Address);
-    }
 
-    // ... Другие поля
+
+        /*наследование обобщений
+         * 
+         Возьмём следующий базовый класс:
+
+        class BaseClass<T>
+        {
+        public T Field;
+        }
+        И унаследуемся от обобщения без указания типа, т.е. от класса BaseClass<T>. Поскольку T не является настоящим типом, нам придётся добавлять универсальный параметр в класс-наследник, таким образом создавая новое обобщение:
+
+        class DerivedClass<T> : BaseClass<T>
+        {
+        public T Property { get; set; }
+        }
+
+                или 
+
+                class DerivedClass : BaseClass<int>
+        {
+            public string Property { get; set; }
+        }
+        */
+
+
+        public void DisplayAddress()
+{
+Console.WriteLine(Delivery.Address);
+}
+
+// ... Другие поля
 }
 
 }
 
 class PremiumService<T> where T : Order<HomeDelivery>
 {
-    public T Order;
+public T Order;
 }
 
 class Order<TDelivery> where TDelivery : Delivery
@@ -1416,31 +1591,31 @@ class Wheel : CarPart
 
 class ElectricCar :Car<ElectricEngine>
 {
-    public override void ChangePart<TPart>(TPart newPart)
-    {
+public override void ChangePart<TPart>(TPart newPart)
+{
 
-    }
+}
 
 }
 
 class GasCar : Car<GasEngine>
 
 {
-    public override void ChangePart<TPart>(TPart newPart)
-    { 
+public override void ChangePart<TPart>(TPart newPart)
+{ 
 
-    }
+}
 }
 
 abstract class Car<TEngine> where TEngine : Engine
 {
-    public TEngine Engine;
+public TEngine Engine;
 
-    public virtual void ChangePart<TPart>(TPart NewPart) where TPart : CarPart
+public virtual void ChangePart<TPart>(TPart NewPart) where TPart : CarPart
 
-    {
+{
 
-    }
+}
 
 }
 
@@ -1449,60 +1624,60 @@ abstract class Car<TEngine> where TEngine : Engine
 class Record<T1, T2>
 {
 
-    public T1 Id;
-    public T2 Value;
-    public DateTime Date;
+public T1 Id;
+public T2 Value;
+public DateTime Date;
 }
 
 //Обобщённые методы
 //нестатическими
 class Obj
 {
-    public void Display<T>(T param)
-    {
-        Console.WriteLine(param.ToString();
-    }
+public void Display<T>(T param)
+{
+Console.WriteLine(param.ToString();
+}
 }
 
 //статическими
 class Program
 {
-    public static void Swap<T>(ref T x, ref T y)
-    {
-        T t = x;
-        x = y;
-        y = t;
-    }
+public static void Swap<T>(ref T x, ref T y)
+{
+T t = x;
+x = y;
+y = t;
+}
 
-    //Для демонстрации работы методов воспользуемся следующим кодом:
-    static void Main(string[] args)
-    {
-        Obj obj = new Obj();
-        obj.Display<int>(345);
+//Для демонстрации работы методов воспользуемся следующим кодом:
+static void Main(string[] args)
+{
+Obj obj = new Obj();
+obj.Display<int>(345);
 
-        int num1 = 4;
-        int num2 = 10;
-        Swap<int>(ref num1, ref num2);
+int num1 = 4;
+int num2 = 10;
+Swap<int>(ref num1, ref num2);
 
-        Console.WriteLine("{0} {1}", num1, num2);
-        Console.ReadKey();
+Console.WriteLine("{0} {1}", num1, num2);
+Console.ReadKey();
 
-    }
+}
 
 }
 
 class BaseClass<T>
 {
-    public T Field;
+public T Field;
 
 }
 class DerivedClass<T> : BaseClass<T> 
 { 
 public T Property
-    {
-        get;
-        set;
-    }
+{
+get;
+set;
+}
 }
 }
 
